@@ -72,5 +72,60 @@
             </div>
     </div>
 
+    <script>
+        const apiKey = "6337b504a34d43138c465629250710";
+
+        function getWeatherData(lokasi) {
+            const urlapi = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${lokasi}&aqi=no`;
+            
+            $('#loading').show();
+            $('#error').hide();
+            $('#tampilan').empty();
+
+            $.ajax({
+                url: urlapi,
+                method: "GET",
+                success: function(data) {
+                    $('#loading').hide();
+                    
+                    if (data.error) {
+                         $('#error').text(`Gagal: ${data.error.message}`).show();
+                         return;
+                    }
+
+                    const htmlContent = `
+                        <h2>Cuaca</h2>
+                        <p>Suhu (°C): ${data.current.temp_c}°C</p>
+                        <p>Suhu (°F): ${data.current.temp_f}°F</p>
+                        <p>Kelembapan: ${data.current.humidity}%</p>
+                        
+                        <hr>
+                        <h2>Lokasi</h2>
+                        <p>Negara: ${data.location.country}</p>
+                        <p>Provinsi: ${data.location.region}</p>
+                        <p>Kecamatan: ${data.location.name}</p>
+                        <p>Longitude: ${data.location.lon}</p>
+                        <p>Latitude: ${data.location.lat}</p>
+                    `;
+                    
+                    $('#tampilan').html(htmlContent);
+                },
+                error: function(xhr, status, error) {
+                    $('#loading').hide();
+                    $('#error').text(`Terjadi kesalahan: ${error}`).show();
+                },
+            });
+        }
+
+        $('#cariButton').on('click', function() {
+            const lokasi = $('#lokasiInput').val();
+            if (lokasi) {
+                getWeatherData(lokasi);
+            } else {
+                $('#error').text('Harap masukkan lokasi.').show();
+            }
+        });
+    </script>
+
 </body>
 </html>
