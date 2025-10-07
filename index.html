@@ -56,6 +56,21 @@
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+        <div class="container">
+        <h1>Cuaca</h1>
+        
+        <div class="input-group">
+            <label for="lokasiInput">Lokasi:</label>
+            <input type="text" id="lokasiInput" placeholder="Contoh: Jakarta">
+            <button id="cariButton">Cari</button>
+        </div>
+
+        <div id="loading" style="display:none; text-align: center;">Memuat data...</div>
+        <div id="error" class="error-message" style="display:none; text-align: center;"></div>
+
+        <div id="tampilan" class="info">
+            </div>
+    </div>
 
 </body>
 </html>
